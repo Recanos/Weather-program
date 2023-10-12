@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Погодное приложение</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a href="#" class="navbar-brand">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="me-2" viewBox="0 0 24 24">
+                    <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                    <circle cx="12" cy="13" r="4"></circle>
+                </svg>
+                <strong>Погодное приложение</strong>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h1>Какой город узнать?</h1>
+        
+        <div class="row">
+            <div class="col-md-6">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <div class="input-group mb-3">
+                        {{ form.name }}
+                    </div>
+                    <input type="submit" value="Узнать" class="btn btn-primary rounded-pill px-3">
+                </form>
+            </div>
+            <div class="col-md-6">
+                <h2 class="mt-0">Меню городов:</h2>
+                {% for form_ab in all_form %}
+                <div class="alert alert-primary" role="alert">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <img src="https://openweathermap.org/img/w/{{ form_ab.icon }}.png" alt="Погода" class="img-thumbnail">
+                        </div>
+                        <div class="col-md-10">
+                            <b>Город:</b> {{ form_ab.city }}<br>
+                            <b>Температура:</b> {{ form_ab.temp }}°C<br>
+                            <b>Скорость ветра:</b> {{ form_ab.wind }} м/сек<br>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            
+            </div>
+        </div>
+    </div>
+</body>
+</html>
