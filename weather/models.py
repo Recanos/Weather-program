@@ -1,7 +1,7 @@
 from django.db import models
 # Create your models here.
 class City(models.Model):
-    name = models.CharField(max_length=30)
+    name = models.CharField(max_length=300)
     
-    def __srt__(self):
-        return self.name
+    def __str__(self):
+        return f'{self.name} | {self.id}'
