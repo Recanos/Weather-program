@@ -15,8 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-
+from weather.views import index, start
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('weather.urls')),
+    path('', start, name='start'),
+    path('weather/', include('weather.urls',namespace = 'weather'))
 ]

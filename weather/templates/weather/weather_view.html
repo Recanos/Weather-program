@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ city }} Weather</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a href="{% url 'weather:index' %}" class="navbar-brand">
+                <strong>Weather report</strong>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <h1 class="text-center">Погода {{ city }} на {{ date }}</h1>
+
+<div class="row justify-content-center">
+    {% for data in all_dt %}
+        <div class="col-md-4 mb-4">
+            <div class="card text-center">
+                <div class="card-header">
+                    {{ data.time }}
+                </div>
+                <div class="card-body">
+                    <img src="https://openweathermap.org/img/w/{{ data.icon }}.png" alt="Weather Icon" width="50" height="50"> <!-- Weather Icon in the row with description and temperature -->
+                    <h5 class="card-title">{{ data.descr }}</h5>
+                    <p class="card-text">Температура: {{ data.temp }}°C</p>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+</div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

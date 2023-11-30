@@ -9,7 +9,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-            <a href="#" class="navbar-brand">
+            <a href="{% url 'weather:index' %}" class="navbar-brand">
                 <strong>Weather report</strong>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,46 +45,62 @@
                 <div class="alert alert-primary" role="alert">
                     <div class="row">
                         <div class="col-md-2">
-                            <img src="https://openweathermap.org/img/w/{{ form_ab.icon }}.png" alt="Погода" class="img-thumbnail">
+                            <a href="{% url 'weather:weather-detail' form_ab.city  %}">
+                                <img src="https://openweathermap.org/img/w/{{ form_ab.icon }}.png" alt="Погода" class="img-thumbnail">
+                            </a>
                         </div>
-                        <div class="col-md-10">
+                        <div class="col-md-9">
                             <div class="row">
                                 <div class="col-md-6">
                                     <b>Город:</b> {{ form_ab.city }}<br>
                                     <b>Температура:</b> {{ form_ab.temp }}°C<br>
-                                    <b>Скорость ветра:</b> {{ form_ab.wind }} м/сек<br>
+                                    <b>Скорость ветра:</b> {{ form_ab.wind }} м/с<br>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="row">
                                         <div class="col-md-4">
-                                            <b>{{ form_ab.time_0 }}</b>
-                                            <img src="https://openweathermap.org/img/w/{{ form_ab.icon_0 }}.png" alt="Изображение1" class="img-thumbnail">
-                                            <br>
-                                            <b>{{ form_ab.temp_0 }}°C</b> <!-- Замените на фактическое значение -->
-                                        </div>
-                                        <div class="col-md-4">
                                             <b>{{ form_ab.time_1 }}</b>
-                                            <img src="https://openweathermap.org/img/w/{{ form_ab.icon_1 }}.png" alt="Изображение2" class="img-thumbnail">
+                                            <a href="{% url 'weather:weather_ch1' form_ab.city  %}">
+                                                <img src="https://openweathermap.org/img/w/{{ form_ab.icon_1 }}.png" alt="Изображение1" class="img-thumbnail">
+                                            </a>
                                             <br>
-                                            <b>{{ form_ab.temp_1 }}°C</b> <!-- Замените на фактическое значение -->
+                                            <b>{{ form_ab.temp_1 }}°C</b> 
                                         </div>
                                         <div class="col-md-4">
                                             <b>{{ form_ab.time_2 }}</b>
-                                            <img src="https://openweathermap.org/img/w/{{ form_ab.icon_2 }}.png" alt="Изображение3" class="img-thumbnail">
+                                            <a href="{% url 'weather:weather_ch2' form_ab.city  %}">
+                                                <img src="https://openweathermap.org/img/w/{{ form_ab.icon_2 }}.png" alt="Изображение2" class="img-thumbnail">
+                                            </a>
                                             <br>
-                                            <b>{{ form_ab.temp_2 }}°C</b> <!-- Замените на фактическое значение -->
+                                            <b>{{ form_ab.temp_2 }}°C</b> 
+                                        </div>
+                                        <div class="col-md-4">
+                                            <b>{{ form_ab.time_3 }}</b>
+                                            <a href="{% url 'weather:weather_ch3' form_ab.city  %}">
+                                                <img src="https://openweathermap.org/img/w/{{ form_ab.icon_3 }}.png" alt="Изображение3" class="img-thumbnail">
+                                            </a>
+                                            <br>
+                                            <b>{{ form_ab.temp_3 }}°C</b> 
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        
+                        <div class="col-md-1">
+                            <form action="{% url 'weather:del_weather' form_ab.city %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-outline-danger btn-sm" aria-label="Delete city">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </form>
+                        </div>
+                        
                     </div>
                 </div>
                 {% endfor %}
             </div>
             {% endif %}
-            
-            </div>
         </div>
     </div>
 </body>
